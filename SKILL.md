@@ -45,7 +45,7 @@ skill-docs/                    # 详细技能文档（19 篇）
 2. 新建主题：读 `实战技巧/14-背屏Web主题-AI创作规范.md` + `15-精华速览与黄金标准.md`
 3. WebView 主题：读 `实战技巧/12-WebView加载HTML到背屏.md`
 4. 完整示例：读 `实战技巧/13-HTML背屏主题完整示例-星舰矩阵时钟.md`
-5. 安装测试：`miroot_theme_test_install`（MiRoot 服务）替换 AI 文件夹主题 + 跳转主题设置，不重启背屏
+5. 安装测试：`miroot_theme_test_install` **优先 Hook 直接安装（directApply=true，仅 root+模块生效，失败自动回退替换流程）**；替换流程为替换 AI 文件夹主题 + 跳转主题设置手动应用，不重启背屏
 
 ## 关键速查
 
@@ -93,4 +93,4 @@ var availGB = window.maml.getDoubleByName('_availableSpace')/(1024*1024*1024);
 - 背屏视口 348×212（dpr 2.8125），不是 976×596；避让用 vw 不用 px
 - 双击会息屏：桌面图标必须单击即开
 - 右下 35dp 圆角：托盘/时间要留 padding 避让
-- 打包 .mrc 用 `miroot_theme_pack`，测试用 `miroot_theme_test_install`
+- **打包统一 .zip 后缀**：`miroot_theme_pack` format=zip / outputName 写完整 `主题名_vX.Y.zip`，**严禁 .zip.zip / .mrc.mrc 重复后缀**；测试用 `miroot_theme_test_install`（**优先 Hook directApply=true，失败回退替换**）
