@@ -77,6 +77,17 @@ window.maml.doAction('launch_app');  // ⚠️ Trigger 必须在 WebView 元素�
 ```js
 window.__setAod = function(v){ v===1 ? $('#aod').classList.add('show') : $('#aod').classList.remove('show'); };
 ```
+### AOD 居中（避开摄像头后右侧剩余区域居中）
+用户说 "右侧居中 / 水平居中 / 垂直居中 / 整体居中" = **避开左侧摄像头避让区后，右侧剩余区域内居中**，不是全屏居中、也不是屏幕右半区居中。
+```js
+var availL=SAFE+2, availR=W-8, availW2=availR-availL;   /* SAFE=0.30W 摄像头避让 */
+var tx=availL+availW2/2;                                 /* 水平：剩余区域居中 */
+/* 垂直：整体块居中用固定线高模型（禁止 measureText 纵向度量——WebView 粗体大数字返回异常） */
+var OFFSET=0, timeLH=tf*1.0, dateLH=df*1.0, gap=Math.max(2,Math.round(FS*0.12));
+var blockH=timeLH+gap+dateLH, blockTop=(H-blockH)/2+OFFSET;
+var ty=blockTop+tf*0.78, dy=blockTop+timeLH+gap+df*0.80;
+```
+⚠️ 别加 `Math.max(SAFE+2, W*0.5)` 这种右半区限制。（详见 07 坑10/11 + 14 第七节）
 
 ### MAML 系统变量（存储/步数/开机）
 ```xml
